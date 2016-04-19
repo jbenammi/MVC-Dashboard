@@ -38,8 +38,11 @@
 |
 */
 
-$route['default_controller'] = "Login";
-$route['Logoff'] = "Login/logoff";
+$route['default_controller'] = "Dashboards";
+$route['signin'] = "Dashboards/sign_in";
+$route['process_signin'] = "Dashboards/signin_process";
+$route['Admin_Dashboard'] = "Dashboards/admin_dashboard";
+$route['register'] = "Dashboards/registration";
 $route['404_override'] = '';
 
 
