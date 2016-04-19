@@ -7,7 +7,7 @@ $login_error = $this->session->flashdata('login_error');
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="Jonathan Ben-Ammi">
-	<title>Dashboard-register</title>
+	<title>Dashboard-add new user</title>
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="/assets/css/materialize.css">
     <link href="/assets/css/materialize_icons.css" rel="stylesheet">
@@ -15,20 +15,24 @@ $login_error = $this->session->flashdata('login_error');
 <body>
 	<nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-        <a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a>
+        <a id="logo-container" href="<?= base_url(); ?>" class="brand-logo center"></a>
+            <ul class="left hide-on-med-and-down">
+            <li><a href="/admin_dashboard"><i class="material-icons left">supervisor_account</i>Admin Dashboard</a></li>
+            <li><a href="/profile"><i class="material-icons left">assignment_ind</i>Profile</a></li>
+            </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a href="/signin">Sign In</a></li>
+                <li><a href="/logoff">Log off</a></li>
             </ul>
         </div>
     </nav>
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <div class="row">
-                <h5 class="header col s12 light">Register</h5>
+                <h5 class="header col s12 light">Add a new user</h5>
                 <form class="form col s6" action="/Dashboards/reg_process" method="post">
-                   <?php if(isset($login_error)){ ?>
+                    <?php if(isset($login_error)){ ?>
                         <p class="warning"><?= $login_error; ?></p>
-                    <?php  } ?>   
+                    <?php  } ?>                    
                     <?php if(isset($errors['first_name'])){ ?>
                         <p class="warning"><?= $errors['first_name']; ?></p>
                     <?php  } ?>
@@ -54,14 +58,11 @@ $login_error = $this->session->flashdata('login_error');
                     <?php  } ?>                    
                     <label for="reg_confirmpass">Confirm Password:</label>
                     <input id="reg_confirmpass" class="input-field" type="password" placeholder="password ********" name="confirmpass" />
-                    <button class="btn waves-effect waves-light" type="submit">Register<i class="material-icons right">send</i></button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Create<i class="material-icons right">send</i></button>
                 </form>
             </div>
-            <div class="row left">
-                <a href="/signin">Already have an account? Sign In</a>
-            </div>
         </div>
-      </div>
+    </div>
 
 
    	<!-- JS Script -->

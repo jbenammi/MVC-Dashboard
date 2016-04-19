@@ -9,7 +9,7 @@
 </head>
 <body>
 	  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><div class="logo"><a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a></div>
+    <div class="nav-wrapper container"><a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/signin">Sign In</a></li>
       </ul>

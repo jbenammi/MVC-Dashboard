@@ -10,11 +10,12 @@ $login_error = $this->session->flashdata('login_error');
 	<title>Dashboard-login</title>
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="/assets/css/materialize.css">
+    <link href="/assets/css/materialize_icons.css" rel="stylesheet">
 </head>
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <div class="logo"><a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a></div>
+            <a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a>
             <ul class="right hide-on-med-and-down">
             <li><a href="/signin">Sign In</a></li>
             </ul>
@@ -43,7 +44,7 @@ $login_error = $this->session->flashdata('login_error');
                 <?php  } ?>
                 <label for="signin_password">Password:</label>
                 <input id="signin_password" class="input-field" type="password" placeholder="password ********" name="password" />
-                <input class="waves-effect waves-light green white-text" type="submit" value="Sign In" />
+                <button class="btn waves-effect waves-light" type="submit" name="action">Sign In<i class="material-icons right">send</i></button>
                 </form>
             </div>
             <div class="row col s12">

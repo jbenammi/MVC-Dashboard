@@ -41,8 +41,14 @@
 $route['default_controller'] = "Dashboards";
 $route['signin'] = "Dashboards/sign_in";
 $route['process_signin'] = "Dashboards/signin_process";
-$route['Admin_Dashboard'] = "Dashboards/admin_dashboard";
+$route['admin_dashboard'] = "Dashboards/view_admin_dash";
+$route['user_dashboard'] = "Dashboards/view_user_dash";
 $route['register'] = "Dashboards/registration";
+$route['edit_user'] = "Dashboards/edit_user";
+$route['add_user'] = "Dashboards/add_user";
+$route['remove'] = "Dashboards/remove";
+$route['show_user/(:num)'] = "Dashboards/show_user/$1";
+$route['logoff'] = "Dashboards/logoff";
 $route['404_override'] = '';
 
 
