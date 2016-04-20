@@ -1,7 +1,7 @@
 <?php
 $errors = $this->session->flashdata('errors');
 $login_error = $this->session->flashdata('login_error');
-$logged_info = $this->session->userdata('user_info');
+$logged_info = $this->session->userdata('logged_info');
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +29,17 @@ $logged_info = $this->session->userdata('user_info');
             <ul class="right hide-on-med-and-down">
                 <li><a href="/logoff">Log off</a></li>
             </ul>
+         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/logoff">Log off</a></li>
+                <?php if($logged_info['admin_rights'] == '1'){ ?>
+                <li><a href="/admin_dashboard">Admin Dashboard</a></li>
+                <?php }
+                else { ?>
+                <li><a href="/user_dashboard">Dashboard</a></li>
+                <?php } ?>
+                <li><a href="/profile/<?= $logged_info['id']; ?>">Profile</a></li>
+            </ul>       
         </div>
     </nav>
     <div class="section no-pad-bot" id="index-banner">
@@ -37,10 +48,7 @@ $logged_info = $this->session->userdata('user_info');
                 <h5 class="header col s12 light">Edit User</h5>
                 <form class="form col s6" action="/edit_user" method="post">
                     <fieldset>
-                        <legend>Edit information</legend>
-                    <?php if(isset($login_error)){ ?>
-                        <p class="warning"><?= $login_error; ?></p>
-                    <?php  } ?>                    
+                        <legend>Edit information</legend>                 
                     <?php if(isset($errors['first_name'])){ ?>
                         <p class="warning"><?= $errors['first_name']; ?></p>
                     <?php  } ?>
@@ -101,7 +109,10 @@ $logged_info = $this->session->userdata('user_info');
     <script type="text/javascript">
           $(document).ready(function() {
     $('select').material_select();
-  });
+
+    $(".button-collapse").sideNav();
+            
+        })
 
     </script>
   

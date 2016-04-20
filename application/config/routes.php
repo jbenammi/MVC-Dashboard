@@ -50,8 +50,8 @@ $route['view_user/(:num)'] = "Dashboards/view_user/$1";
 $route['view_user_admin/(:num)'] = "Dashboards/view_user_admin/$1";
 $route['edit_user'] = "Dashboards/edit_user";
 $route['add_user'] = "Dashboards/add_user";
-$route['remove'] = "Dashboards/remove";
-$route['show_user/(:num)'] = "Dashboards/show_user/$1";
+$route['remove/(:num)'] = "Dashboards/remove/$1";
+$route['show_user_page/(:num)'] = "Dashboards/show_user_page/$1";
 $route['logoff'] = "Dashboards/logoff";
 $route['404_override'] = '';
 

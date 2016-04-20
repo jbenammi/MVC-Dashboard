@@ -28,6 +28,17 @@ $logged_info = $this->session->userdata('logged_info');
             <ul class="right hide-on-med-and-down">
                 <li><a href="/logoff">Log off</a></li>
             </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/logoff">Log off</a></li>
+                <?php if($logged_info['admin_rights'] == '1'){ ?>
+                <li><a href="/admin_dashboard">Admin Dashboard</a></li>
+                <?php }
+                else { ?>
+                <li><a href="/user_dashboard">Dashboard</a></li>
+                <?php } ?>
+                <li><a href="/profile/<?= $logged_info['id']; ?>">Profile</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -101,6 +112,13 @@ $logged_info = $this->session->userdata('logged_info');
    	<!-- JS Script -->
 	<script src="/assets/js/jquery-2.2.3.js"></script>
 	<script src="/assets/js/materialize.js"></script>
-  
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        $(".button-collapse").sideNav();
+            
+        })
+
+    </script>  
 </body>
 </html>

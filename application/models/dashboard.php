@@ -18,6 +18,13 @@ class Dashboard extends CI_Model{
 		return $this->db->query($query, $user_id)->row_array();
 	}
 
+	public function get_user_page($id){
+		$query = "SELECT messages.id, messages.message, messages.created_on, messages.wall_id, concat(users.first_name, \" \", users.last_name) as author FROM messages JOIN users ON users.id = messages.users_id WHERE messages.wall_id = $id ORDER BY created_on desc";
+		return $this->db->query($query)->result_array();
+	}
+
+
+
 	public function add_user($user_info){
 		$query = "INSERT INTO users(first_name, last_name, email, password, admin_rights, created_on, updated_on) VALUES(?, ?, ?, ?, 0, now(), now())";
 		$query2 = "SELECT users.email FROM users WHERE email = ?;";
@@ -70,6 +77,12 @@ class Dashboard extends CI_Model{
 		$user_id = [$user_info['id']];
 		return $this->db->query($query, $user_id)->row_array();
 	}
+	public function remove_user($id){
+		$query = "DELETE FROM users WHERE id = ?";
+		$user_id = [$id];
+		return $this->db->query($query, $user_id);
+	}
+
 }
 
 
