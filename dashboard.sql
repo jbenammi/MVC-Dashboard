@@ -18,27 +18,31 @@ USE `dashboard` ;
 -- Table `dashboard`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dashboard`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `email` VARCHAR(100) NULL,
-  `password` VARCHAR(100) NULL,
-  `admin_rights` TINYINT(1) NULL,
-  `created_on` DATETIME NULL,
-  `updated_on` DATETIME NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL DEFAULT NULL,
+  `last_name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `password` VARCHAR(100) NULL DEFAULT NULL,
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+  `admin_rights` TINYINT(1) NULL DEFAULT NULL,
+  `created_on` DATETIME NULL DEFAULT NULL,
+  `updated_on` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `dashboard`.`messages`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dashboard`.`messages` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `message` LONGTEXT NULL,
-  `created_on` DATETIME NULL,
-  `updated_on` DATETIME NULL,
-  `users_id` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `message` LONGTEXT NULL DEFAULT NULL,
+  `created_on` DATETIME NULL DEFAULT NULL,
+  `updated_on` DATETIME NULL DEFAULT NULL,
+  `users_id` INT(11) NOT NULL,
+  `wall_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_messages_users_idx` (`users_id` ASC),
   CONSTRAINT `fk_messages_users`
@@ -46,19 +50,21 @@ CREATE TABLE IF NOT EXISTS `dashboard`.`messages` (
     REFERENCES `dashboard`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `dashboard`.`comments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dashboard`.`comments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `comment` VARCHAR(255) NULL,
-  `created_on` DATETIME NULL,
-  `updated_on` DATETIME NULL,
-  `messages_id` INT NOT NULL,
-  `users_id` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `comment` VARCHAR(255) NULL DEFAULT NULL,
+  `created_on` DATETIME NULL DEFAULT NULL,
+  `updated_on` DATETIME NULL DEFAULT NULL,
+  `messages_id` INT(11) NOT NULL,
+  `users_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comments_messages1_idx` (`messages_id` ASC),
   INDEX `fk_comments_users1_idx` (`users_id` ASC),
@@ -72,7 +78,9 @@ CREATE TABLE IF NOT EXISTS `dashboard`.`comments` (
     REFERENCES `dashboard`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 8
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

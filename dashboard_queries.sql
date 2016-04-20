@@ -18,8 +18,22 @@ JOIN messages
 ON messages.id = users_commmessagesents.messages_id;
 
 SELECT * FROM messages;
-
+-- query for getting messages --
 SELECT messages.id, messages.message, messages.created_on, messages.wall_id, concat(users.first_name, " ", users.last_name) as author FROM messages JOIN users ON users.id = messages.users_id WHERE messages.wall_id = 4 ORDER BY created_on desc;
 
 
+SELECT concat(first_name, " ", last_name) as full_name, first_name, last_name, id, created_on, email, description FROM users where id = 4;
 
+SELECT * FROM comments;
+-- query for getting comments on a specific message --
+SELECT messages.id as message_id, comments.comment, comments.created_on, concat(users.first_name, " ", users.last_name) as author
+FROM messages 
+JOIN comments
+ON comments.messages_id = messages.id 
+JOIN users
+ON comments.users_id = users.id
+WHERE messages.id = 8;
+
+
+-- query for inserting comments into the table --
+INSERT INTO comments(comment, created_on, updated_on, messages_id, users_id) VALUES('I dont know whats going on now', now(), now(), 8, 2);
