@@ -3,6 +3,9 @@
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+ /** {
+  border: 1px dotted red;
+ }*/
 .materialize-red {
   background-color: #e51c23 !important;
 }
@@ -2722,7 +2725,7 @@ ul li {
 }
 
 .divider {
-  height: 1px;
+  height: 2px;
   overflow: hidden;
   background-color: #e0e0e0;
 }
@@ -5904,7 +5907,7 @@ textarea.materialize-textarea {
   padding: 1.6rem 0;
   /* prevents text jump on Enter keypress */
   resize: none;
-  min-height: 3rem;
+  max-height: 2rem;
 }
 
 .hiddendiv {

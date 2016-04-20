@@ -51,7 +51,7 @@ $user_info = $this->session->userdata('logged_info');
                         <?php for ($i = 0; $i < count($all_users); $i++){ ?>
                         <tr>
                             <td><?= $all_users[$i]['id']; ?></td>
-                            <td><a href="/show_user/<?= $all_users[$i]['id']; ?>"><?= $all_users[$i]['full_name']; ?></td>
+                            <td><a href="/show_user_page/<?= $all_users[$i]['id']; ?>"><?= $all_users[$i]['full_name']; ?></td>
                             <td><?= $all_users[$i]['email']; ?></td>
                             <td><?= date("l F jS, Y", strtotime($all_users[$i]['created_on'])); ?></td>
                             <td><?php if($all_users[$i]['admin_rights'] == 1){

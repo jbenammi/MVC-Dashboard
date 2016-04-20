@@ -41,15 +41,22 @@ class Dashboards extends CI_Controller {
 	}
 	public function show_user_page($id) {
 		$this->load->model('Dashboard');
-		$user_info = $this->Dashboard->get_user_page($id);
-		$this->load->view('user_page', ['profile_info' => $user_info]);
+		$message_info = $this->Dashboard->get_messages($id);
+		$wall_user = $this->Dashboard->get_wall_user($id);
+		$comment_info = $this->Dashboard->get_comments($id);
+		$this->load->view('user_page', ['message_info' => $message_info, 'wall_info' => $wall_user, 'comment_info' => $comment_info]);
 	}
 	public function create_message(){
-
 		$post_message = $this->input->post();
 		$this->load->model('Dashboard');
 		$this->Dashboard->add_message($post_message);
-		redirect("/show_user_page/".$post_message['wall_id']);
+		redirect("/show_user_page/" . $post_message['wall_id']);
+	}
+		public function create_comment($id){
+		$post_comment = $this->input->post();
+		$this->load->model('Dashboard');
+		$this->Dashboard->add_comment($post_comment);
+		redirect("/show_user_page/" . $id);
 	}
 	public function signin_process(){
 		$this->load->library('form_validation');
