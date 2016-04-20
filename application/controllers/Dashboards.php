@@ -24,7 +24,21 @@ class Dashboards extends CI_Controller {
 	public function add_user(){
 		$this->load->view('add_user');
 	}
-
+	public function view_profile($id){
+		$this->load->model('Dashboard');
+		$user_info = $this->Dashboard->get_one_user($id);
+		$this->load->view('edit_profile', ['profile_info' => $user_info]);
+	}
+	public function view_user($id){
+		$this->load->model('Dashboard');
+		$user_info = $this->Dashboard->get_one_user($id);
+		$this->load->view('edit_profile', ['profile_info' => $user_info]);
+	}
+	public function view_user_admin($id){
+		$this->load->model('Dashboard');
+		$user_info = $this->Dashboard->get_one_user($id);
+		$this->load->view('edit_user', ['profile_info' => $user_info]);
+	}	
 	public function signin_process(){
 		$this->load->library('form_validation');
 		$this->load->helper('security');
@@ -41,7 +55,7 @@ class Dashboards extends CI_Controller {
 			$user_info = $this->input->post();
 			$user_signin = $this->Dashboard->signin($user_info);
 			if($user_signin) {
-				$this->session->set_userdata(['user_info' => $user_signin]);
+				$this->session->set_userdata(['logged_info' => $user_signin]);
 				if($user_signin['admin_rights'] == 1){
 					redirect("Dashboards/view_admin_dash");
 				}
@@ -102,6 +116,88 @@ class Dashboards extends CI_Controller {
 			}
 		}
 	}
+
+	public function edit_profile_info(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules("email", "E-Mail", "trim|required|valid_email");
+		$this->form_validation->set_rules("first_name", "First Name", "trim|required|xss_clean");
+		$this->form_validation->set_rules("last_name", "Last Name", "trim|required|xss_clean");
+		if($this->form_validation->run() === FALSE){
+			$errors = $this->form_validation->getErrorsArray();
+			$this->session->set_flashdata("errors", $errors);
+			redirect(base_url("/edit_profile"));
+		}
+		else
+		{
+			$this->load->model("Dashboard");
+			$user_info = $this->input->post();
+			$edit_user = $this->Dashboard->edit_info($user_info);
+			$this->session->set_userdata(['logged_info' => $edit_user]);
+			if ($edit_user['admin_rights'] == '1') {
+			redirect($uri = base_url("/admin_dashboard"));
+			}
+			else {
+			redirect($uri = base_url("/user_dashboard"));
+			}
+		}
+	}
+		public function edit_user(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules("email", "E-Mail", "trim|required|valid_email");
+		$this->form_validation->set_rules("first_name", "First Name", "trim|required|xss_clean");
+		$this->form_validation->set_rules("last_name", "Last Name", "trim|required|xss_clean");
+		if($this->form_validation->run() === FALSE){
+			$errors = $this->form_validation->getErrorsArray();
+			$this->session->set_flashdata("errors", $errors);
+			redirect(base_url("/edit_user"));
+		}
+		else
+		{
+			$this->load->model("Dashboard");
+			$user_info = $this->input->post();
+			$edit_user = $this->Dashboard->edit_info_admin($user_info);
+			redirect($uri = base_url("/admin_dashboard"));
+		}
+	}
+		public function edit_profile_desc(){
+			$this->load->model("Dashboard");
+			$user_info = $this->input->post();
+			$edit_user = $this->Dashboard->edit_profile_descript($user_info);
+			$this->session->set_userdata(['logged_info' => $edit_user]);
+			if ($edit_user['admin_rights'] == '1') {
+			redirect($uri = base_url("/admin_dashboard"));
+			}
+			else {
+			redirect($uri = base_url("/user_dashboard"));
+			}
+		}
+	
+
+	public function edit_password(){
+		$this->load->library('form_validation');
+		$this->load->helper('security');
+		$this->form_validation->set_rules("confirmpass", "Confirm Password", "trim|required|matches[password]");
+		$this->form_validation->set_rules("password", "Password", "trim|required|min_length[8]|do_hash");
+		if($this->form_validation->run() === FALSE){
+			$errors = $this->form_validation->getErrorsArray();
+			$this->session->set_flashdata("errors", $errors);
+			$session_id = $this->session->userdata('user_info');
+			redirect("/profile/" . $session_id['id']);
+		}
+		else
+		{
+			$this->load->model("Dashboard");
+			$user_info = $this->input->post();
+			$update_pass = $this->Dashboard->update_pass($user_info);
+			$session_id = $this->session->userdata('user_info');
+			if ($session_id['admin_rights'] == 1) {
+			redirect($uri = base_url("/admin_dashboard"));
+			}
+			else {
+			redirect($uri = base_url("/user_dashboard"));
+			}
+		}
+	}	
 
 }
 

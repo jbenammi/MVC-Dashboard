@@ -1,5 +1,5 @@
 <?php 
-$user_info = $this->session->userdata('user_info');
+$user_info = $this->session->userdata('logged_info');
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ $user_info = $this->session->userdata('user_info');
     <a id="logo-container" href="<?= base_url(); ?>" class="brand-logo center"></a>
         <ul class="left hide-on-med-and-down">
             <li class="active"><a href="/admin_dashboard"><i class="material-icons left">supervisor_account</i>Admin Dashboard</a></li>
-            <li><a href="/profile"><i class="material-icons left">assignment_ind</i>Profile</a></li>
+            <li><a href="/profile/<?= $user_info['id']; ?>"><i class="material-icons left">assignment_ind</i>Profile</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
             <li><a href="/logoff">Log off</a></li>
@@ -60,7 +60,7 @@ $user_info = $this->session->userdata('user_info');
                                 else {
                                     echo "User";
                                     } ?></td>
-                            <td><a href="/edit_user">edit</a> | <a href="#modal<?= $all_users[$i]['id'] ?>" class="modal-trigger">remove</a></td>
+                            <td><a href="/view_user_admin/<?= $all_users[$i]['id'] ?>">edit</a> | <a href="#modal<?= $all_users[$i]['id'] ?>" class="modal-trigger">remove</a></td>
                         </tr>
                      <?php   } ?>
                     </tbody>

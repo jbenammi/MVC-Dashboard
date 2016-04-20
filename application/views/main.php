@@ -1,3 +1,6 @@
+<?php 
+$logged_info = $this->session->userdata('logged_info');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +9,34 @@
 	<title>Dashboard</title>
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="/assets/css/materialize.css">
+    <link href="/assets/css/materialize_icons.css" rel="stylesheet">
 </head>
 <body>
 	  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a>
-      <ul class="right hide-on-med-and-down">
+    <div class="nav-wrapper container"> 
+    	<?php if($logged_info['id']){ ?>
+    	<a id="logo-container" href="<?= base_url(); ?>" class="brand-logo center"></a>  
+    	<?php } 
+        else {  ?>
+    	<a id="logo-container" href="<?= base_url(); ?>" class="brand-logo"></a>  
+	    <?php } ?>
+        <?php if($logged_info['id']){ ?>
+    <ul class="left hide-on-med-and-down">
+    	<?php if($logged_info['admin_rights'] == '1'){ ?>
+        <li><a href="/admin_dashboard"><i class="material-icons left">supervisor_account</i>Admin Dashboard</a></li>
+        <?php }
+        else { ?>
+        <li><a href="/user_dashboard"><i class="material-icons left">contacts</i>Dashboard</a></li>
+        <?php } ?>
+        <li><a href="/profile/<?= $logged_info['id']; ?>"><i class="material-icons left">assignment_ind</i>Profile</a></li>
+    </ul>
+	<ul class="right hide-on-med-and-down">
+        <li><a href="/logoff">Log off</a></li>
+        <?php } 
+        else {  ?>
+	<ul class="right hide-on-med-and-down">  
         <li><a href="/signin">Sign In</a></li>
+        <?php } ?>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
